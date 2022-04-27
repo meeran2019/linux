@@ -1,1 +1,86 @@
 
+----------------------------------------------------------------------------------------------------------------------------
+RHEL8 ROOT PASSWORD, REGISTER SUBSCRIPTION & MANAGING REPOSITORIES: 
+----------------------------------------------------------------------------------------------------------------------------
+
+SETTING ROOT PASSWORD THROUGH BOOT: 
+
+    1. While booting, select e (edit)
+    2. search linux, ctrl + e to move end and add 'rd.break'
+    3. enter ctrl + x 
+    4. to mount ,  mount -o remount,rw /sysroot 
+    5. chroot /sysroot 
+    6. passwd 
+    7. touch ./autorelabel 
+    8. exit , exit 
+
+
+SET SELinux ON SYSTEM IN ENFORCING MODE: 
+    
+    Security Enhanced Linux 
+
+    getenforce                  To check selinux mode 
+    vim /etc/selinux/config     set the variable selinux=enforcing 
+    systemctl reboot            Reboot the system 
+    sestatus or getenforce      To check the status 
+    man selinux                 Manual help page 
+
+
+SOFTWARE REPOSITORIES IN RHEL 8: 
+
+    There are 2 different repositories, 
+
+        BaseOS          -   Specific to kernel, OS 
+        AppStream       -   Specific to application. Consists of modules and packages. 
+        DNF (Dandified yum): 
+            DNF is package manager for rpm based systems. 
+            It is updated version of yum (yellowdog updated modifier)
+            It is default package manager in RHEL8.
+
+
+SETUP REPOSITORIES: 
+
+    GPG - GNU Privacy Guard: 
+        It allows to encrypt and sign the data. 
+
+    dnf repolist                To list repos configured on system 
+    dnf grouplist hidden        To list group available packages. 
+    man yum.conf                Manual help page
+    dnf clean all               To clear cache 
+    vim /etc/yum.repos.d/system.repo: 
+        add baseos & appstream details. 
+    
+    1. Get the repo path and copy to the new directory path. 
+    2. Add the xxx.repo file in /etc/yum.repos.d/
+    3. system.repo file: 
+            [repo-id]
+            name=
+            baseurl=file:///file-path  or https://url-path or ftp:// 
+            enabled=1/0
+            gpgcheck=1/0
+            gpgkey=url 
+    4. yum.conf is applies to all but if maintained under .repo , .repo will take higher precedence. 
+    5. to verify, dnf install lftp 
+
+
+REGISTER RHEL SYSTEM TO REDHAT SUBSCRIPTION: 
+
+    subscription-manager register --serverurl url-path      -   register system to subscription portal.
+    subscription-manager attach --auto                      -   add redhat.repo under etc/yum.repos.d 
+
+    default server-url is maintained at /etc/rhsm/rhsm.conf
+
+    --serverurl     -   to use server url 
+    --baseurl       -   to use base url for repos.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
