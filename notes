@@ -73,7 +73,75 @@ REGISTER RHEL SYSTEM TO REDHAT SUBSCRIPTION:
     --serverurl     -   to use server url 
     --baseurl       -   to use base url for repos.
 
+
 ----------------------------------------------------------------------------------------------------------------------------
+DEPLOY, CONFIGURE & MAINTAIN SYSTEMS:
+----------------------------------------------------------------------------------------------------------------------------
+
+ASSIGNING HOSTNAME: 
+
+    hostnamectl or hostname                     -   To display current hostname assigned to system.
+    hostnamectl set-hostname system.example.com -   To assign new host name to system.
+    man hostnamectl                             -   Manual help 
+    hostnamectl status  or hostnamectl          -   To get detailed host information.
+
+    can also update hostname in /etc/hostname and reboot.
+
+
+CONFIGURING ETHERNET CONNECTION WITH STATIC IPV4 ADDRESS AND DNS IP: 
+
+    Install the "yum install NetworkManager" 
+
+
+    nmcli connection show                       -   To display existing connections configured on different interfaces.
+    ip addr                                     -   To display existing connection with IP address and status.
+
+    nmcli connection add con-name system type ethernet ifname enp0s3 ipv4.addresses 192.168.99.10/24 ipv4.gateway 192.168.99.1                                        -   To configure ethernet interface with ipv4 ip & gateway address.
+
+    nmcli connection modify system ipv4.dns 192.168.99.254 ipv4.method manual   -   To configure DNS IP address on connection and make connection static. Must be manual to make static. 
+
+    nmcli connection up system                  -   To activate connection.
+    systemctl restart NetworkManager            -   To restart network service.
+    /etc/resolv.conf                            -   To verify DNS ip address.
+    
+    /etc/sysconfig/network-scripts/             -   Location of connection profile ifcfg-system. It is interface configuration file. 
+    For static IP, BOOTPROTO=none.
+
+    route -n                                    -   Gives routing table.
+
+
+CONFIGURING SYSTEM TO BOOT IN GRAPHICAL TARGET: 
+
+    Run Level       Description                               Targets
+    0               Shutdown and poweroff the system.         runlevel0.target,poweroff.target
+    1               Setup rescue shell.                       runlevel1.target,system.target
+    2               Setup non graphical multi user system.    runlevel2.target,multi-user.target
+    3               Setup non graphical multi user system.    runlevel3.target,multi-user.target
+    4               Setup non graphical multi user system.    runlevel4.target,multi-user.target
+    5               Setup graphical multi user system.        runlevel5.target,graphical.target
+    6               Shutdown and reboot the system.           runlevel6.target,reboot.target
+
+    dnf group install Workstation       -   Install workstation environment.
+    systemctl isolate graphical.target  -   to change systemd target in current session.
+    systemctl set-default graphical.target -    To set graphical target as default systemd target.
+    cd /usr/lib/systemd/system          -   Directory containing systemd units of installed packages.
+    cd /etc/systemd/system              -   directory containing local systemd configurations.
+    man systemd.unit                    -   manual help
+    systemctl get-default               -   To get the current target.
+
+
+SCHEDULING CRON JOB AS ROOT USER IN OTHER USERS CRONTAB: 
+
+        
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 
