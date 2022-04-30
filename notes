@@ -132,22 +132,141 @@ CONFIGURING SYSTEM TO BOOT IN GRAPHICAL TARGET:
 
 SCHEDULING CRON JOB AS ROOT USER IN OTHER USERS CRONTAB: 
 
-        
+    Create the user: 
+        usearadd sheik              -   To create user sheik 
+        passwd lisa                 -   To setup a password for sheik.
+    
+    Change Permission of script and user: 
+        chmod +x /test.sh           -   To add execute permission for the script.
+        chown owner:group file-name -   To change ownership 
+    
+    Update other user crontab: 
+        crontab -u sheik -e         -   To edit other users crontab as root. 
+        crontab -u sheik -l         -   To list other users crontab.     
+
+        * * * * * (Minute Hour Day Month Day-of-week)
+            Day-of-week - 0 to 7 (0/7 for sunday)
+
+    /etc/cron.allow     -   user must be listed to use crontab  
+    /etc/cron.deny      -   user must be listed to deny to use crontab. 
+
+    both files does not exists, then only root user can use crontab. 
+
+    crontab -u user     -   user option can only use by root user. 
+    /var/spool/cron/    -   Path to check any cron maintained for the user.
+
+
+SCHEDULING CRON JOB AS NORMAL USER: 
+
+    setfacl -m u:bob:rwx /file-name             -   To modify the file permission using setfacl 
+    getfacl file-name                           -   To get the file access. 
+
+    This is same as above except cronjob is created under user, 
+        1. Switch to bob user, crontab -e (To add cron tab) 
+        2. crontab -l (To list crontab)
+        3. Logs can be verified at /var/log/cron file. 
+        4. crontab -r  (To delete crontab)
+
+
+SCHEDULING JOBS USING "at" COMMAND:
+
+    dnf install at                          -   Install package for atd 
+    systemctl start atd                     -   start the service 
+    systemctl enable atd                    -   enable the service.
+    atq                                     -   Display jobs in queue
+    atrm                                    -   To delete jobs.
+    at now + 30 minutes                     -   Execute at to schedule the job.
+
+    /etc/at.allow                           -   allowed users  
+    /etc/at.deny                            -   denied users. 
+
+    1. at now + 1 minute   (ctrl + D to exit )
+    2. atq 
+    3. atrm job-id 
+
+
+CONFIGURE SERVICE TO START AT SYSTEM BOOT: 
+    
+    autofs tools used for mounting and unmounting the file system automatically. 
+    
+    dnf install autofs          -   install autofs 
+    systemctl start autofs      -   start the service 
+    systemctl enable autofs     -   start at boot time.
+    systemctl status autofs     -   service status . 
+
+
+CONFIGURING SYSTEM TO USE TIME SERVICES: 
+
+    There are 2 types of clock, hardware and software (system) clocks. 
+
+    NTP - Network Time Protocol which provides time source. 
+    It uses chronyd service, in RHEL 8, provides both client and server process.
+
+    systemctl status chronyd                -   To checek status of chronyd service. 
+    timedatectl set-timezone TIME_ZONE      -   To et time zone.
+    timedatectl set-time HH:MM:SS           -   To set time. 
+    hwclock -w                              -   To synch hardware clock to system time. 
+    /etc/chrony.conf   (server server-name iburst)  -   To configure system to use NTP server. 
+    chrony sources                          -   shows list of time server. 
+
+
+WORKING WITH MODULE STREAMS-dnf: 
+
+    dnf module list             -       To list available module 
+    dnf module info perl        -       To list different streams for perl module. 
+    dnf module info --profile perl:5.26     -   To list specific stream.
+    dnf install @perl:5.26      -       To install specific stream 
+    dnf module info mariadb | grep stream   -   To get stream details.
+
+
+MODIFYING BOOTLOADER (GRUB2) SETTINGS: 
+
+    /etc/default/grub 
+        Add biosdevname=0 net.ifnames=0 to variable GRUB_CMDLINE_LINUX 
+        Remove rhgb and quiet 
+
+    rhgb    -   redhat graphical boot. It us GUI mode booting screen with most of information is hidden while users sees a rotating activity icon spinning.
+    quiet   -   hides most boot messages before rhgb starts. 
+
+    grub2-mkconfig -o /boot/grub2/grub.cfg 
+
 
 ----------------------------------------------------------------------------------------------------------------------------
+UNDERSTAND AND USE OF ESSENTIAL TOOLS: 
+----------------------------------------------------------------------------------------------------------------------------
+
+MAKING SSH CONNECTION TO REMOTE HOST: 
+
+    systemctl status sshd               -   To check status of sshd service.
+    ssh user-name@ip-address/host-name  -   To establish ssh connection for LDAP user. 
+    Enter password                      -   LDAP user password. 
+    man ssh                             -   Manual help page for ssh. 
+    man sshd                            -   Manual help page for ssh daemon.
+    netstat -an                         -   Display network configurations. It can be used to check if connection established. 
+
+    SSH service listens on Port 22.
+    ~/.ssh/known_hosts                  -   It maintains and check the hosts in users home directory. 
+
+    NOTE: ssh ip-address/host-name      -   Without user, whoever executing (root/user) will be taken as user-name. 
 
 
+SECURELY COPY FILES ACROSS HOSTS USING SCP: 
 
+    scp /root/notes.txt user-name@ip-address/host-name:/tmp/        -   To copy files from one host to another using SSH copy (SCP) 
+    man scp                                                         -   Manual help page.
 
+    NOTE: By default, if destination path is not available, it will be created.
+            By using /dir/ (trailing slash at end) , will throw error if file is not available.
 
+    
+USING GREP TO MATCH LINES STARTING WITH PATTERNS: 
 
+    ^   -   To match single character.
+    $   -   TO match with first character. 
 
+    grep -E "^name" file.txt        -   To search expression in file. 
 
-
-
-
-
-
+    
 
 
 
