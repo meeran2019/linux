@@ -331,7 +331,118 @@ USING FIND COMMANDS TO LIST ALL FILES AND DIRECTORIES BASED ON UID:
 
     find directory-to-search -uid uid-no 
 
+
+USING TAR COMMAND TO ARCHIVE AND COMPRESS CONTENTS OF DIRECTORY: 
+
+    TAR - Tape Archive 
+
+    -c      -   create 
+    -f      -   file 
+    -j      -   create in .bzip2 
+    -v      -   verbose 
+    -z      -   create in .zip 
+    -x      -   extract contents from compressed file. 
+    -C      -   path to extract the file 
+
+    tar -cjvf home.tar.bz2 /home 
+    tar -cjvf archived-files.tar.bz2 files-to-archive 
+
+    f requires argument and this must be in end. 
+
+    ls -l --block-size=MB       -   To display block size.
+
+    tar -cvf linux-tutorial.tar linux-tutorial/             -   archive the file in tar format. 
+    bzip2 linux-tutorial.tar                                -   compress the file in .bzip2 format. 
+    tar -cjvf linux-tutorial.tar.bz2 linux-tutorial/        -   combine both archive and compress in .bz2 format 
+
+
+USING TAR COMMAND TO EXTRACT THE DATA FROM COMPRESSED FILE: 
+
+    tar -xvf notes.tar.bz2 -C /path-to-extract              -   extract the file 
+
+
+USING TAR TO ARCHIVE CONTENTS WITH GZIP COMPRESSION: 
+
+    tar -cvf linux-tutorial.tar linux-tutorial/                 -   archive the file. 
+    gzip linux-tutorial.tar                                     -   compress the file in gzip format 
+    tar -czvf linux-tutorial.tar.gz linux-tutorial              -   combine both archive and compress in zip format. 
+
+
+DECOMPRESS THE FILE USING GUNZIP AND BUNZIP2: 
+
+    gunzip file-name.tar.gz             -   uncompress in gzip format. 
+    bunzip2 file-name.tar.bz2           -   uncompress in bzip2 format. 
+
+    NOTE: This change from .gzip or .bz2 format to TAR format. 
+
+
+FILE SYSTEM PERMISSIONS AND COMMANDS: 
+
+    r       read 
+    w       read & write 
+    x       execute 
+
+    drwxrwxr-x. 3 meeran meeran 31 Apr 26 21:52 linux-tutorial
+
+    -       type of file. It can be d for directory. 
+    rwx     user/owner access 
+    rwx     group access 
+    r-x     others access 
+    meeran  user owner 
+    meeran  group owner 
+
+    NOTE:   In Directory, to give read/write permission, then it require execution permission also. 
+            without execution permission, cannot list or execute any commands in directory.
+
+
+    chown   -   To set user and group ownership of file. 
+    chmod   -   To change permission level. 
+    setfacl -   To configure ACL for specific user. 
+
+    chmod u+rwx file-name               -   add read, write and execute file permission to user.
+    chmod g-w file-name                 -   remove write permission at group level.
+    chmod a+r file-name                 -   provides all system user with read access. (a for all system user)
+    chmod ug-r file-name                -   removes the read permission of both user and group.
+    chmod ugo+w file-name               -   provides write permission to user, group and others.
+
+    file-name can be absolute or relative path. 
+
+    chown user:group -R file-name       -   to change owner and group user. -R is used for recursive. 
+    groupadd group-name                 -   to add new group 
+
+    Can also use octal number format: 
+
+        chmod 777 file-name         -   provide all access to all. 
+        chmod 776 file-name         -   not provide execute access to others. 
+
+    Access Control List: 
+
+        It is used to configure additional user access. 
+
+        Access ACL - To configure access on files and directories. It is not apply to new directories/files under that. 
+        Default ACL - To configure access on directories. If new directories are created, applies to that as well. 
+
+
+CONFIGURING ACL ON FILE AND DIRECTORY: 
+
+
+    setfacl -m u:sheik:rwx /acl/private             -   To configure Access ACL.
+    setfacl -R -m u:bob:rwx /acl/bob_dir/           -   To configure Access ACL recursively. 
+    setfacl -m d:u:bob:rwx /acl/bob_dir/            -   To configure Default ACL, so any future directories and files take this ACL.
+
+    getfacl file/directory                          -   To get the ACL details. 
+
+
     
+
+
+
+
+
+
+
+
+
 
 
 
