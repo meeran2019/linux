@@ -261,12 +261,81 @@ SECURELY COPY FILES ACROSS HOSTS USING SCP:
     
 USING GREP TO MATCH LINES STARTING WITH PATTERNS: 
 
-    ^   -   To match single character.
-    $   -   TO match with first character. 
+    ^   -   To match with first character. 
+    $   -   To match with last character. 
 
     grep -E "^name" file.txt        -   To search expression in file. 
+    egrep   -   extended regular expression. 
+    -i      -   ignore case 
+    -v      -   invert match (not matching)
+    -w      -   match compelte line. 
+    -n      -   display line number. 
+
+
+USING GREP FOR NON MATCHING PATTERN: 
+
+    egrep -v 'sed|Sed' > test.txt       -   To copy non match to file.
+
+    grep    -   to search pattern using regular expressions.
+        consider + ? | as pattern and use them with backslash. 
+
+    egrep   -   to search pattern using extended regular expressions.
+        consider + ? | as meta characters. 
+
+
+USING FIND COMMANDS TO LIST FILES OWNED BY USER: 
+
+    find / -user lisa -type f 
+    find directory-to-search -user user-name -type file-type 
+
+    f - regular file 
+    c - character 
+    d - directory 
+
+
+USING FIND COMMAND TO LOCATE FILE USING NAME OF FILE: 
+
+    find / -name file.conf -type f 
+    find directory-to-search -name file-name -type file-type 
+
+    >   -   copy both error and output to file 
+    1>  -   copy output alone 
+    2>  -   copy error alone 
+
+
+USING FIND TO SEARCH FILES WITH EXTENSION .TXT: 
+
+    find / -name "*.txt" -type f > /text 2>&1 
+    find directory-to-search -name expression -type file-type 
+
+    2>&1    -   to copy both standard error
+
+    find / -name "*.txt" -type f > test          -   Display error in terminal and output to file. 
+    find / -name "*.txt" -type f 1> test         -   Display error in terminal and output to file. 
+    find / -name "*.txt" -type f 2> test         -   Display output in terminal and error in file. 
+
+    find / -name "*.txt" -type f > test 2>&1    -   Wont display output in terminal but write to file. 
+
+
+USING FIND COMMAND TO SAVE ALL DIRECTORIES OWNED BY USER: 
+
+    find / -user lisa -type d > lisa.txt 
+    find directory-to-search -user user-name -type type-of-file 
+
+    find / -user lisa -type d -delete   -   this will delete the directory. 
+
+
+USING FIND COMMANDS TO LIST ALL FILES AND DIRECTORIES BASED ON UID: 
+
+    find / -uid 1002 
+
+    find directory-to-search -uid uid-no 
 
     
+
+
+
+
 
 
 
