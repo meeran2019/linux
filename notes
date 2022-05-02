@@ -459,6 +459,76 @@ CREATING SYSMBOLIC LINKS:
 OPERATE RUNNING SYSTEMS AND PROCESS
 ----------------------------------------------------------------------------------------------------------------------------
 
+ADJUSTING PRIORITY OF PROCESS WITH RENICE: 
+
+    Nice is basically to run a program with modified scheduling priority. 
+
+    Renice is used to alter the priority of running process. 
+
+    TOP command provides a dynamic real time view of running system. It displays system summaary information as well list of process or threads. 
+
+    PS command is used to list the current running process and their PID along with other information. 
+
+    nice value can be between -20 to 19. Lesser the nice value, more CPU resources will be used. Higher the nicer value, less CPU value will be used. 
+
+    nice -n -5 dd if=/dev/zero of=/dev/null     -> if=input file, /dev/zero=generates with zero, of=output file, /dev/null=null file.
+    renice -n 5 -p PID                          -> change the nice value.
+
+    ctrl + z    -   To stop the process. 
+    bg          -   To run in background.
+
+
+RUNNING A JOB IN BACKGROUND WITH PREDEFIND NICE VALUE: 
+
+    nice -n 10 sleep 3600 &         -   Run the sleep command by using nice.  & to run in backend. 
+    ps aux | grep sleep             -   To get the process details.
+    top -p PID                      -   To get process details in TOP. 
+    nice -n 10 sleep 3600           -   To run in foreground. CTRL+C will cancel process. CTRL+Z & bg will stop and run in background.
+
+    ps aux        -   List all process with user name, memory, cpu and command used. 
+    
+
+KILL PROCESS FORCEFULLY:     
+
+    kill -9 PID                     -   To kill process ID.
+
+
+TUNING KERNEL PARAMETER "vm.swappiness" PERSISTENTLY: 
+
+    SWAP is a space on disk that is used when amount of physical RAM memory is full. 
+    When linux runs out of RAM, inactive pages are moved from RAM to SWAP space. 
+    Swap space can take from dedicated swap partition or swap file. 
+
+    swappiness is used how aggressive kernel will swap memory pages. 
+    Higher value will increase aggressiveness and lower value will descrease amount of swap.
+    Values between 1 and 60. 0 for disable. 10 is recommended.
+
+    sysctl - kernel variables. 
+
+    For permanent, in /etc/sysctl.conf file, vm.swappiness=10 
+
+    For temporary, sysctl -w vm.swappiness=10
+
+    sysctl -a                       -   To display all system control. 
+    systemctl -a | grep swap        -   To filter the specific system control. 
+    systemctl -w vm.swappiness=20   -   To edit temporarily. (vm - virtual memory)
+    /etc/sysctl.conf                -   To edit permanently and requires reboot to effect. 
+
+    /proc/sys                       -   kernel virtual interface. 
+
+
+
+DISABLING IPV4 PACKET FORWARDING USING SYSCTL.D: 
+
+    IP Forwarding is ability of system to accept incoming network packets on one interface, recognize that it not meant for itself and it should be passed to another network and then forwards it accordingly. 
+
+    net.ipv4.ip_forward=1       (0 for OFF and 1 for ON)
+
+    sysctl -a | grep net.ipv4.ip_forward 
+    sysctl -w net.ipv4.ip_forward=0         -   To disable ipv4 packet forward.
+    /etc/sysctl.conf                        -   To permanently do change and require reboot to effect. 
+
+    
 
 
 
