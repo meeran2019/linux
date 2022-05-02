@@ -528,7 +528,14 @@ DISABLING IPV4 PACKET FORWARDING USING SYSCTL.D:
     sysctl -w net.ipv4.ip_forward=0         -   To disable ipv4 packet forward.
     /etc/sysctl.conf                        -   To permanently do change and require reboot to effect. 
 
+    /proc/sys/net                           -   can update here also temporarily.
+
+    sysctl -p                               -   To make changes effect immediately.
+
+    libvirtd    -   enables ipv4 forwarding during boot. 
+
     
+
 
 
 
