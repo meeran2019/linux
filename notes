@@ -425,15 +425,39 @@ FILE SYSTEM PERMISSIONS AND COMMANDS:
 
 CONFIGURING ACL ON FILE AND DIRECTORY: 
 
-
     setfacl -m u:sheik:rwx /acl/private             -   To configure Access ACL.
     setfacl -R -m u:bob:rwx /acl/bob_dir/           -   To configure Access ACL recursively. 
     setfacl -m d:u:bob:rwx /acl/bob_dir/            -   To configure Default ACL, so any future directories and files take this ACL.
 
     getfacl file/directory                          -   To get the ACL details. 
 
+    drwxrwxr-x+ 2 root root 32 May  2 05:54 bob_dir -   If (+) added means, ACL is applied. 
 
-    
+
+CREATING SYSMBOLIC LINKS: 
+
+    Soft Link: 
+        Also known as symbolic link.
+        It act as pointer or reference to the original file. 
+        It takes different inode and permission.    
+        If original file is removed, softlink will not work. 
+        It is comparitively slower. 
+
+        ln -s source-file soft-link-name 
+        ln -s process1.txt soft-link.txt
+
+    Hard Link: 
+        It act as copy (mirrored) of selected file. 
+        It take the same inode and permission. 
+        If original file is removed, still data can be accessed. 
+
+        ln source-file hard-link-name 
+        ln process.txt hard-link.txt
+
+
+----------------------------------------------------------------------------------------------------------------------------
+OPERATE RUNNING SYSTEMS AND PROCESS
+----------------------------------------------------------------------------------------------------------------------------
 
 
 
