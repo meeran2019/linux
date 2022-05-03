@@ -615,4 +615,19 @@ INTRODUCING DEFAULT USER SETTINGS:
 
     skel                            -   skeleton directory. 
 
+
+VERIFYING DIFFERENT SETTINGS OF USER ACCOUNT: 
+
+    /etc/passwd                     -   user account information. 
+    /etc/shadow                     -   secure user account information include password agening etc. 
+    /etc/group                      -   group account information.
+
+
+OVERRIDING DEFAULT USER SETTINGS - useradd: 
+
+    useradd                         -   To add new user. 
+    passwd                          -   To add/change password. 
+    chage                           -   To display/configure password ageing. 
     
+    
+

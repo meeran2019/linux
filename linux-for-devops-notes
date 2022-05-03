@@ -1,0 +1,38 @@
+
+PROCESS MANAGEMENT: 
+
+    ps -ef          -   list of running process 
+    kill -9 PID     -   kill process 
+    fg              -   fore ground
+    bg              -   background 
+    top             -   List top 20 process. 
+
+
+NETWORKING:
+
+    hostname        -   returns hostname (name of server)
+    ping address    -   to check server is accessible 
+    wget            -   to download 
+    ifconfig        -   to get ip address.
+    curl            -   to get as browser.
+
+TELNET: 
+
+    Each application have port under the same server (ip).
+
+    Port No         Service 
+    21              FTP 
+    22              SSH
+    23              TELNET 
+    25              SMTP 
+    53              DNS 
+    80              HTTP 
+    443             HTTPS 
+
+    telnet ip-address/host-name port-number 
+    telnet localhost 80
+
+    netstat -ntlp 
+
+    
+
