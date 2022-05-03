@@ -532,23 +532,79 @@ DISABLING IPV4 PACKET FORWARDING USING SYSCTL.D:
 
     sysctl -p                               -   To make changes effect immediately.
 
-    libvirtd    -   enables ipv4 forwarding during boot. 
+    libvirtd    -   enables ipv4 forwarding during boot.
+
+
+INTRODUCING TUNED AND TUNED PROFILES: 
+
+    TuneD is a service which monitors the system and and optimize the performance of system to different use cases. 
+
+    Pre defined tuneD profile is available at /usr/lib/tuned 
+
+    It desgined based on, 
+        High throughput , network - High throughput 
+        Low latency - Network - low latency. 
+        Power saving 
+        Balanced 
+
+    Predefined profiles are, 
+        Power saving profiles
+        Performance boosting profiles. 
+
+    New profiles can be created under /etc/tuned 
+
+
+TUNED PROFILE CONFIGURATION FILE tuned.conf: 
+
+    cd /usr/lib/tuned/<profile>
+    accelerator-performance  functions    latency-performance  optimize-serial-console  throughput-performance
+    balanced                 hpc-compute  network-latency      powersave                virtual-guest
+    desktop                  intel-sst    network-throughput   recommend.d              virtual-host
+    
+    cd virtual-guest/
+    tuned.conf
+
+    It can be maintained at both /usr/lib/tuned/<profile>/tuned.conf  and etc/tuned/<profile>/tuned.conf  . /etc/tuned takes higher precedence if maintained in both.
+
+    man tuned.config 
+    man tuned.profile 
+    man tuned-main.config 
+
+
+TUNED MAIN CONFIGURATION FILE: 
+
+    /etc/tuned/tuned-main.config 
+    man tuned-main.config 
+
+
+SETTING TUNED PROFILE: 
+    
+    tuned-adm is CLI tool for switching between different tuning profile. 
+
+    dnf install tuned               -   To install tuned service.
+    tuned-adm list                  -   List available tuned profiles.
+    tuned-adm recommend             -   List recommended profile. 
+    tuned-adm active                -   To list current active profile.
+    tuned-adm profile profile-name  -   To switch to profile.
+    man tuned-adm                   -   Manual help page.
+
+
+CUSTOMIZING TUNED PROFILE: 
+
+    dnf install tuned               -   To install tuned service.
+    mkdir /etc/tuned/myprof         -   To create directory under /etc/tuned path. 
+    touch tuned.config              -   To create tuned.config file under /etc/tuned/myprof path.
+    tuned-adm profile myprof        -   To use newly created myprof profile.
+    systemctl restart tuned         -   To restart the service. 
+
+
+MERGING TWO TUNED PROFILE: 
+
+    tuned-adm profile profile1 profile2     -   To merge multiple profile (profile1 & profile2)
+
+
+----------------------------------------------------------------------------------------------------------------------------
+MANAGING USERS AND GROUPS: 
+----------------------------------------------------------------------------------------------------------------------------
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
