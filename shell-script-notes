@@ -1,0 +1,109 @@
+
+---------------------------------------------------------------------------------------------------------
+USER AND ACCOUNT CREATION: 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+Naming, Permission, Variables, Builtins: 
+---------------------------------------------------------------------------------------------------------
+
+    #!/bin/bash         -   represent shebang script. 
+    #                   -   to comment a single line. 
+    chmod 755           -   to add execute permission to all users. 
+    ./                  -   execute script. . represents current dir. / represent divider to the file. 
+    sh name.sh          -   execute the script. 
+
+    type -a echo        -   Shell builtin. 
+    help echo           -   to get help page for built in shell command. /bin/bash 
+    man uptime          -   to get manual help /usr/bin/uptime. 
+
+    WORD='apple'        -   Assigna value to variable. 
+    $WORD or ${WORD}    -   To refer the variable. 
+
+    NOTE:   In Variable, ther is NO spaces allowed.
+            In Echo, Single quotes prevents expansion of variable. If using variables, use double quotes. 
+
+    ${WORD}ing          -   To append the value to variable then must use ${variable}
+
+
+---------------------------------------------------------------------------------------------------------
+Special variables, Pseudocode, Command Substitution, If Statement and Conditionals: 
+---------------------------------------------------------------------------------------------------------
+
+    Builtin Variables: 
+        
+        $UID                -   returns user id. It is system variable. 
+        $BASH               -   Path to BASH binary. 
+        $HOME               -   Home directory. 
+        $HOSTNAME           -   host name.
+        $PIPESTATUS[1]      -   Array variable Hold exit status of last executed foreground pipe. 
+        $PWD                -   Present Working Directory. 
+        $1 $2               -   Positional parameters passed from command line to script. 
+        $?                  -   Gives return code of last executed statement. 
+        $0                  -   File name of current script.
+        $#                  -   no of arguments passed to script.
+        $$                  -   Process number of current shell. 
+
+        man bash (Under Shell Variables)    -   Have complete list of shell variables can use.
+
+
+    Command Substitution: 
+
+        variable-name=$(commands)           -   Used to execute the command and place in variables.
+        FILE-LIST=$(ls -l)
+        variable-name=`commands`            -   Use "tick" to execute the command and place in variables.
+
+    If Statement: 
+
+        if [[ condition ]]
+        then 
+          echo " "
+        else
+          echo " "
+        fi 
+
+        (or)
+
+        if [[condition]];
+        then 
+            statements;
+        else 
+            statements;
+        fi 
+
+        Operators: 
+
+            -eq     -   equal   -   used for number. 
+            -lt     -   less than 
+            -gt     -   greater than
+            ==      -   equality - used for string. It is BASH command and not POSIX.
+            =       -   equal - used for string. It is POSIX and recommended. 
+            !=      -   not equal 
+            !       -   not 
+            -d      -   check existence of directory. 
+            -e      -   check existence of file. 
+            &&      -   to check AND.  
+            ||      -   to check OR. 
+
+        UID 0   -   Assigns to root. 
+
+        
+---------------------------------------------------------------------------------------------------------
+Exit Status, Return Codes, String Test Conditionals: 
+---------------------------------------------------------------------------------------------------------
+
+    Exit Status: 
+
+        if script is successful, it returns exit with 0. If any error, will retuen non zero. 
+
+        exit 1      -   To make failure with given retuen code. 
+        exit        -   It stop the execution further. 
+
+
+
+
+
+
+
+
+
