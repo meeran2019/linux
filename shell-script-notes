@@ -100,6 +100,22 @@ Exit Status, Return Codes, String Test Conditionals:
         exit        -   It stop the execution further. 
 
 
+---------------------------------------------------------------------------------------------------------
+Reading Standard Input: 
+---------------------------------------------------------------------------------------------------------
+
+    User can input values to shell script by 2 ways,
+
+        1. In CLI to pass the value as argument. 
+        2. Using read method. 
+
+    Standard Input 
+    Standard Output 
+    Standard Error 
+
+    read -p 'Enter the value: ' VALUE_VARIABLE
+
+    
 
 
 
