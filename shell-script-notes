@@ -40,7 +40,7 @@ Special variables, Pseudocode, Command Substitution, If Statement and Conditiona
         $PWD                -   Present Working Directory. 
         $1 $2               -   Positional parameters passed from command line to script. 
         $?                  -   Gives return code of last executed statement. 
-        $0                  -   File name of current script.
+        $0                  -   File name of current script executed. 
         $#                  -   no of arguments passed to script.
         $$                  -   Process number of current shell. 
 
@@ -115,11 +115,84 @@ Reading Standard Input:
 
     read -p 'Enter the value: ' VALUE_VARIABLE
 
-    
+
+---------------------------------------------------------------------------------------------------------
+PASSWORD GENERATION AND SHELL SCRIPT ARGUMENTS: 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+Random Data, Cryptographic Hash Functions, Text and String Manipulation: 
+---------------------------------------------------------------------------------------------------------
+
+    Random Data: 
+
+        Builtin Variable  ${RANDOM} used to get the random number from 1 to 6 digit. 
+
+        date +%s        -   format in seconds. + to tell using format.
+        date +%N        -   Nano seconds. 
+
+    Hash Functions: 
+
+        Different hash function is used to generate the hash of file or values.
+        
+        sha256sum, sha1sum, md5sum etc 
+
+        echo "value" | sha256sum | head -c 8 
+
+    Head Function: 
+
+        Used to return the top of the line in file or standard input. 
+
+        head -c  -   no of characters.
+        head -n  -   no of lines. 
+
+    echo "helloworld" | fold -1 | shuf | head -c1
+
+    Fold is used to convert single line to multiple line.
 
 
+---------------------------------------------------------------------------------------------------------
+Positional Parameters, Arguments, For Loops & Special Parameters: 
+---------------------------------------------------------------------------------------------------------
+
+    Parameter VS Argument: 
+        Parameter is variable used inside the shell script.
+        Argument is data passed to shell script. 
+
+    $0  -   File name of scrip executed. 
+
+    basename /var/lib/test  -   returns test (NOTE: it wont check whether file or exists or not)
+    dirname /var/lib/test   -   returns /var/lib  (NOTE: it wont check whether file or exists or not)
+
+    $#  -   no of arguments passed.
+    $*  -   in double quotes, gets arguments as single argument. 
+    $@  -   in double quotes, gets argumetns as separate arguments. 
+
+    NOTE: Without quotes, will pass as separate arguments. 
+
+    For Loop: 
+
+        for x in WORDS
+        do 
+          statements
+        done 
+
+---------------------------------------------------------------------------------------------------------
+While loop, Infine loop, Shifting and Sleeping: 
+---------------------------------------------------------------------------------------------------------
+
+    while condition
+    do 
+        statements 
+    done 
+
+    sleep   -   delays for specific amount of time. 
+
+    true    -   always return successful true with return code as zero.
+
+    shift   -   shift positional parameters. 
 
 
-
+---------------------------------------------------------------------------------------------------------
 
 

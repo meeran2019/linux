@@ -49,6 +49,7 @@ fi
 # NOTE: --stdin not available in ubuntu, so skipping password change for now. 
 
 # To get hostname details. 
+# $HOSTNAME is variable . so can use $HOSTNAME or $(hostname) to get. 
 HOST_NAME=$(hostname)
 
 # To display all values. 
