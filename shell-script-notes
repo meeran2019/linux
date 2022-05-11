@@ -203,3 +203,123 @@ LINUX PROGRAMMING CONVENTIONS - SHELL SCRIPTING
 Advanced Standard input, Standard Output and Standard Error: 
 ---------------------------------------------------------------------------------------------------------
 
+Standard Input 
+
+    Generally from keyboard. Also from pipes. Also from files. 
+
+Standard Output 
+
+    Output display in screen. 
+
+Standard Error 
+
+    Error display in screen. 
+
+
+    >   -   Redirect the standard output. It will OVERRIDE. 
+    <   -   Redirect the standard input. 
+    >>  -   Redirect the standard output. It will APAPEND.
+
+    echo "Hello World!" > hello.txt     -   standard output.
+    READ LINE < hello.txt               -   standard input. 
+
+File Descriptor: 
+
+    0   STDIN   
+    1   STDOUT 
+    2   STDERR
+    &   BOTH STDOUT & STDERR 
+
+    read x < hello.txt  (or) read x 0< hello.txt  ->   If 0 is not mentioned, system assume it as zero with STDIN. 
+
+    echo "hello" > hello.txt (or) echo "hello" 1> hello.txt  -> In standard output, if 1 is not mentioned, default assumes as 1. If any error, will not redirect and show in screen. 
+
+    echo "hello" 2> hello.error     -> redirects standard error to file but display output in screen.
+
+    echo "hello" 2> hello.error 1> hello.output     -> Redirects both standard output and error to file.
+
+    echo "hello" 2>> hello.error 1>> hello.output     -> Redirects both standard output and error to file. Append to the file. 
+
+    2>&1  or 2>>&1  -> redirects both standard output and error in same file. 
+
+    &> or &>>       -> redirects both standard output and error in same file. 
+
+    |&              -> In pipe used to redirect both output and error. 
+
+    /dev/null       -> Write to null file. 
+
+
+---------------------------------------------------------------------------------------------------------
+PARSING COMMAND LINE OPTIONS 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+Case Statements: 
+---------------------------------------------------------------------------------------------------------
+
+    Case is execute commands based on pattern matching. 
+
+        case WORD in 
+            pattern) 
+                statements 
+            ;; 
+            pattern2 | pattern3) 
+                statements 
+            ;; 
+            *) 
+                statements 
+        esac 
+
+    Pattern Matching: 
+
+        *       -   matches any character 
+        ?       -   matches single character 
+        [...]   -   matches any one of enclosed characters. 
+
+    
+---------------------------------------------------------------------------------------------------------
+Functions: 
+---------------------------------------------------------------------------------------------------------
+
+    Function is used to DRY (Dont Repeat Yourself) code. 
+    Function will be called and avoid multiple lines of code. 
+
+    function function-name 
+    { commands ; }
+
+    function-name()
+    { commands ; return 1 }
+
+    local variable-name=value       -   This is local scope only to the function.
+    readonly variable-name=value    -   variable cannot be modified. 
+
+    Logger: 
+        Enter messages into system log. /var/log/message file. 
+
+        logger options message 
+        logger -t shell-script "message"
+
+    if [[ -f $VARIABLE1 ]]      -   checks whether variable exists. 
+    then 
+
+    cp -p       -   -p preservers original value like timestamp, permission etc. 
+
+
+
+---------------------------------------------------------------------------------------------------------
+Parsing Command Line Options with getopts: 
+---------------------------------------------------------------------------------------------------------
+
+    It is used to parse positional parameters as options.
+
+    It helps to give user different options and based on argument, program behaviour will change.
+
+    getopts optstring name [arg]
+
+    $OPTARG     -   places the argument in variable. 
+
+    
+
+
+
+
