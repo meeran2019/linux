@@ -628,6 +628,10 @@ OVERRIDING DEFAULT USER SETTINGS - useradd:
     useradd                         -   To add new user. 
     passwd                          -   To add/change password. 
     chage                           -   To display/configure password ageing. 
+
+    For locking use chage. IN passwd, still can ssh be used. 
+
+    
     
     
 

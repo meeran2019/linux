@@ -318,7 +318,30 @@ Parsing Command Line Options with getopts:
 
     $OPTARG     -   places the argument in variable. 
 
-    
+    :           -   parameter is mandatory
+    ::          -   parameter is optional 
+
+    $(( 6 / 4 ))        -   arithmetic expression. Returns 1. 
+    $(( VARA + VARB ))  -   can use variable 
+    $(( VARA++ ))       -   increment variable by 1
+    $(( VARA-- ))       - decrement variable by 1
+    $(( VAR +=5 ))
+
+    let , expr          -   another utility for arithmetic expressions. 
+
+    $OPTIND             -   Index of next argument to be processed, starts from 1.
+
+    bc          -   basic calculator, used for floating point arithmetic. 
+
+
+---------------------------------------------------------------------------------------------------------
+Deleting and Disabling Linux Accounts: 
+---------------------------------------------------------------------------------------------------------
+
+    userdel -f user     -   force delete 
+    userdel user        -   delete user 
+
+
 
 
 
