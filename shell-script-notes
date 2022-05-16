@@ -342,7 +342,193 @@ Deleting and Disabling Linux Accounts:
     userdel user        -   delete user 
 
 
+---------------------------------------------------------------------------------------------------------
+TRANSFORMING DATA, DATA PROCESSING AND REPORTING: 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+Cut and Awk: 
+---------------------------------------------------------------------------------------------------------
+
+CUT: 
+
+    Removes sections (columns) from each of line. 
+
+    -c5     character.  displays 5th character. 
+    -c 4-7  displays range from 4th to 7th position. 
+    -c 4-   displays from range 4 till end of line. 
+    -c -4   displays upto 4 characters. 
+    -c 1,3,5    displays 1st, 3rd, 5th character. 
+
+    -b      bytes 
+    -f      fields 
+    -d      delimeter 
+
+    echo -e "hello \t world'        -   to use 'e' so backslash will be expanded. 
+    -f 1            -   default takes delimeter as TAB. 
+    -d , -f 1       -   upto delimeter consider first field and after second field. 
+    -d ',' -f 1     -   upto delimeter consider first field and after second field. 
+                        If special character, use in double quote.
+
+    --output-delimeter=','  -   input delimter is replaced with output delimeter. 
+
+    grep '^first'           -   start with first.
+    grep "last$"            -   ends with end
 
 
+AWK: 
 
+    Pattern scanning and text processing language.
+
+    awk -F ':' '{print $1,$3}' /etc/passwd              -   no delimter in output. 
+    awk -F ':' -v OFS=',' '{print $1,$3}' /etc/passwd   -   keep given delimeter.
+    awk -F ':' '{print $1 "," $3}' /etc/passwd   -   keep given delimeter in other format.
+
+    awk '$print $(NF - 3) '     -   To get 3rd field from last. 
+
+
+---------------------------------------------------------------------------------------------------------
+Open Network Ports: 
+---------------------------------------------------------------------------------------------------------
+
+    sudo netstat -ntlp | grep -i ':' | awk '{print $4}' | awk -F ':' '{print $NF}' 
+
+    netstat -ntlp 
+        n - numeric display (ssh to 22)
+        l - listen 
+        p - port 
+        t - tcp 
+        u - udp 
+
+---------------------------------------------------------------------------------------------------------
+Sort and Uniq: 
+---------------------------------------------------------------------------------------------------------
+
+Sort: 
+
+    It is sort a line of text files. 
+
+    sort file-name      -   sort the file alphabetically from a..z.
+    sort -r file-name   -   sort in reverse order z..a 
+    sort -h             -   sort and display in human readable format. useful in du and df commands.
+    sort -u             -   sort and keep UNIQUE.
+
+    cut -d ':' -f 3 /etc/passwd | sort -r       -   standard input for reverse. 
+    cut -d ':' -f 3 /etc/passwd | sort          -   standard input for sorting. 
+    cut -d ':' -f 3 /etc/passwd | sort -n       -   numeric sorting. 
+    cut -d ':' -f 3 /etc/passwd | sort -rn      -   numeric reverse sorting. 
+
+    du vs df: 
+
+        du - disk used is space used under a particular directory or files in file system.
+        df - display amount of available disk space.
+
+Uniq: 
+
+    It works only on sorted files.
+    If unsorted it will not work. 
+
+    sudo netstat -ntlp | grep -i ':' | awk '{print $4}' | awk -F ':' '{print $NF}' | sort -n | uniq
+
+    sudo netstat -ntlp | grep -i ':' | awk '{print $4}' | awk -F ':' '{print $NF}' | sort -n | uniq -c -> No of times the value occured. To get occurances.
+
+wc: 
+
+    It is word count. 
+    wc -l   -   line counts. 
+    wc -c   -   byte counts 
+    wc -m   -   char counts.
+    wc -w   -   word counts 
+    wc      -   gives no of lines, words & characters. 
+
+geoiplookup: 
+
+    geoiplookup ip-address 
+
+
+sed: 
+
+    It is Stream Editor.
+
+    s   -   substitute 
+
+    sed 's/source/target/flags' file-name        -   display changed value, not update original file.
+
+    By default, sed if find the search pattern in line, it will replace and subsequent search pattern on same line will be ignored. Flag g can be used to search in all. Flag 2 will replace only 2nd occurance.
+
+    It performs text transformation on streams like standard input, output or error. 
+
+    It does like substitute, appennd, remove, insert or remove lines. 
+
+    sed 's/test2/seddd/' user.err       -   substitute. NOTE: IT only changes in display outpu and also first occurence only. 
+    sed 's/test2/seddd/' user.err > user.err.sed    -   Write display output to separate file.
+    sed 's/test2/seddd/1' user.err      -   It looks for replacement in first occurance.
+    sed 's/test2/seddd/3' user.err      -   It looks for replacement in third occurance.
+    sed 's/test2/seddd/i' user.err      -   case sensitive 
+    sed 's/search-pattern/replace-pattern/g'    -   It replace all values not only first occurence. 
+    sed -i 's\search\replace'           -   inplace update and update in original file. 
+    sed -i.bak 's\search\replace'       -   backup original file as .bat and inplace update in original file. 
+    sed 's/search/replace/gw like.txt' love.txt     -   creates new file like.txt 
+    sed 's/\/home\/user/\/home\/updated/'    -   Incase / used then can use escaping character with \ followed by /.
+    Can use # or : to replace as delimeter instaed of \.
+
+    sed'/search/d'      -   delete the searched line. 
+    sed '^#/d'          -   ^ checks first line and delete starts with # (comments).
+    sed '^$/d'          -   ^$ means blank line. 
+    sed '^#/d;^$/d'     -   combines both.
+
+    script.sed          -   create the sed file with sed commands inside. 
+                            sed -f sed-file-name new-file-name 
+    sed '2 s/search/replace/'    -  it only search in 2nd line. 
+    sed '2s/search/replace/'        -   it only search in 2nd line. 
+    sed '2,4 s/search/replace/'    -  it only search in 2nd and 4th line. 
+
+    sed ' /group/ s/search/replace/ '   -   if a line contains group, only that will do search and replace.
+
+
+---------------------------------------------------------------------------------------------------------
+NETWORKING SCRIPTING & AUTOMATION OF DISTRIBUTED SYSTEMS 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+Configuring a Mini Network and Scripting for Remote Systems: 
+---------------------------------------------------------------------------------------------------------
+
+    ping -c ip-address/host-name        -   send count of 3 packets. 
+
+
+tee: 
+
+    read from standard input and write to standard output and files. 
+
+    tee -a      -   append 
+
+    NOTE: 
+        sudo echo 'test' >> /etc/hosts          -   permission denied due to >> has no sudo access. 
+        echo 'test' | sudo tee -a /etc/hosts    -   a appends and tee uses sudo permission.
+
+
+ssh-keygen  -   generates key pair in default location. /home/user/.ssh/id_rsa or id_rsa.pub 
+
+ssh-copy-id server-name     -   copy the public key to server. 
+
+for SERVER in $(cat server-file)
+do 
+    ssh ${SERVER} hostname 
+    ssh ${SERVER} uptime 
+done 
+
+ssh server01 hostname ; hostname        -   2nd host execute on local. 
+ssh server01 'hostname ; hostname'      -   with quotes, both execute on remote. 
+
+ssh return exist status as zero if successful or 255 if failure. 
+
+true    -   returns zero (0)
+false   -   returns one (1)
+
+sudo ssh server01 id    -   gives sudo permission to execute ssh. 
+ssh server01 sudo id    -   gives sudo permission in remote to execute id command. 
+
+
+---------------------------------------------------------------------------------------------------------
 
