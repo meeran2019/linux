@@ -1,1 +1,43 @@
 
+Linux &***: 
+
+$#  -   total no of arguments passed
+$*  -   gives the arguments passed. If given in quotes, takes as separate argument.
+        test.sh 1 2 3  -> Takes 1 2 3 separately with or without quotes. 
+$@  -   gives the arguments passed. If given in quotes, takes as single argument.
+        test.sh 1 "2 3" -> Takes 2 & 3 as single argument. 
+$$  -   process id of current execution.
+$!  -   process id of went into background. 
+$?  -   gives exit status of last command.
+
+
+Advanced File Permissions: 
+
+    SetUid Bit: 
+        This is for execution.
+        When this bit is set, it always run as owner of file.
+        Given at owner level.
+
+    SetGid Bit: 
+        This is for execution.
+        Given at group level.
+        When this bit is set, it always run as group of file.
+    
+    SetGid Bit - Directory:
+        For newly created subdirectories/files, create as group.
+
+    Sticky bit directory:
+        It is applied to other. (+t)
+        Only owner/root of file can delete.
+
+
+Shell Types:
+    Interactive Shell:
+        /bin/bash , /bin/sh 
+
+    Non Interactive shell:
+        /sbin/nologin 
+
+Execute a script in backend: 
+    sh test.sh & 
+
